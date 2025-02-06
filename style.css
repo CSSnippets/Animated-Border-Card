@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sixtyfour+Convergence&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: rgba(2, 2, 10, 0.9);
+    font-family: "Poppins", sans-serif;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 70px;
+}
+
+.card {
+    --border-radius: 1rem;
+    --bg-color: #393e41;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 300px;
+    height: 400px;
+    background: var(--bg-color);
+    border-radius: var(--border-radius);
+    color: #fff;
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    isolation: isolate;
+    overflow: hidden;
+}
+
+.card::before,
+.card::after {
+    content: '';
+    position: absolute;
+}
+
+.card::before {
+    width: 200%;
+    height: 200%;
+    background-image: conic-gradient(var(--color) 0deg,
+            transparent 60deg, transparent 180deg, var(--color) 180deg,
+            transparent 240deg);
+    inset: -50%;
+    z-index: -2;
+    animation: borderanimation 4s linear infinite;
+}
+
+.card:hover::before {
+    animation-play-state: paused;
+}
+
+@keyframes borderanimation {
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
+.card::after {
+    --inset: 4px;
+    background: #111;
+    inset: var(--inset);
+    border-radius: calc(var(--border-radius) - var(--inset));
+    z-index: -1;
+    transition: all 0.3s linear;
+}
+
+.card:hover::after {
+    background: var(--bg-color);
+}
+
+.card i {
+    font-size: 3.5rem;
+    color: transparent;
+    -webkit-text-stroke: thin var(--color);
+}
+
+.card:hover i {
+    color: var(--color);
+    -webkit-text-stroke-width: 0;
+}
+
+.card .title {
+    text-align: center;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    margin-block: 2.5rem 1.5rem;
+    color: var(--color);
+}
+
+.card .description {
+    line-height: 1.5rem;
+    text-align: center;
+    opacity: 0.75;
+}
